@@ -10,8 +10,10 @@ Give us a <font size="4">✪</font> if you want more of this content!
 ## How to navigate
 
 Up above you'll see directories for different topics, and inside each directory you will find specific breakdowns.  For example, if you want to learn how to setup Presto on Amazon Web Services go to:
-- ↳ ```running Presto on cloud services```
-  - ↳ ```running Presto on AWS```
+
+↳ ```running Presto on cloud services```
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;↳ ```running Presto on AWS```
 
 ## Suggestions and Feedback
 
