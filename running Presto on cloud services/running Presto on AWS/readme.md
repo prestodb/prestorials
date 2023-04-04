@@ -93,7 +93,7 @@ http://master-public-dns-name:8889/
 Which should show 2 active workers
 
 ![Presto Web UI showing 2 active workers](./screenshots/prestowebui_online.png)
-*<p style="text-align: center;">Screenshot of Presto Web UI showing 2 active workers</p>*
+*<p align="center">Screenshot of Presto Web UI showing 2 active workers</p>*
 
 ### ***Steps for Windows***
 

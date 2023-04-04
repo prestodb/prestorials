@@ -65,7 +65,7 @@ If you setup [Presto running in AWS using EMR](https://github.com/prestodb/prest
 7. Type ```exit;``` to leave the Presto CLI
 
 ![Terminal showing SSH connection to EMR instance and querying in the Presto CLI](./screenshots/example_aws_glue_query.png)
-*<p style="text-align: center;">Screenshot of Terminal showing SSH connection to EMR instance and querying in the Presto CLI</p>*
+*<p align="center">Screenshot of Terminal showing SSH connection to EMR instance and querying in the Presto CLI</p>*
 
 ### Permissions issues
 
