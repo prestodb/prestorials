@@ -24,8 +24,8 @@ There are four common ways to run Presto on AWS:
 1. Open the AWS Console and navigate to the EMR service
 2. Click **Create cluster**
 3. Name the cluster ```prestorial_cluster```
-4. Under **Application Bundle** select Presto
-5. If you're using AWS Glue to catalog data, check the **Use for Presto table metadata** option
+4. Under **Application Bundle** select **Presto**
+5. If you're using AWS Glue to catalog data, check the **☑️ Use for Presto table metadata** option
    1. *See tutorial for connecting to AWS Glue under the "connecting Presto to data sources" directory of this repo*
 2. Remove the **Task** instance group
 3. Set the Core instance group size to 2
@@ -92,13 +92,19 @@ http://master-public-dns-name:8889/
 ```
 Which should show 2 active workers
 
+![Presto Web UI showing 2 active workers](./screenshots/prestowebui_online.png)
+*<p style="text-align: center;">Screenshot of Presto Web UI showing 2 active workers</p>*
+
 ### ***Steps for Windows***
 
-2. Open the AWS Console and navigate to the EMR service
+*coming soon*
 
 ## [2] Running Presto using Ahana Cloud
+
 ## [3] Using Marketplace AMI
+
 ## [4] Using Elastic Compute Cloud (EC2)
+
 
 ## References
 
