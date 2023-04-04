@@ -3,7 +3,7 @@
 ## Introduction
 
 This folder contains example files and steps for connecting Presto on AWS Glue.
-Soon we will have a video walkthrough as well as a written walk through in blog form.
+Soon we will have a video walk-through as well as a written walk through in blog form.
 
 ## Requirements
 
@@ -48,7 +48,7 @@ Soon we will have a video walkthrough as well as a written walk through in blog 
    1. AWS Glue tries its best to guess what the data for each field is but will typically default to string if it's unsure
 2. Edit the schema to correct any mistakes the Glue made
 
-### Use the Presto CLI to query:
+### Use the Presto CLI to query from an EMR Presto Cluster:
 
 If you setup [Presto running in AWS using EMR](https://github.com/prestodb/prestorials/tree/main/running%20Presto%20on%20cloud%20services/running%20Presto%20on%20AWS) then Presto is already configured to connect to Glue using the Hive connector.
 1. Use the following command to SSH into your EMR master node
@@ -71,7 +71,9 @@ If you setup [Presto running in AWS using EMR](https://github.com/prestodb/prest
 
 If you get an error in the Presto CLI similar to
 ```
-failed: User: arn:aws:sts::###:assumed-role/AmazonEMR-InstanceProfile-###/### is not authorized to perform: glue:GetDatabases on resource: arn:aws:glue:region:###:catalog because no identity-based policy allows the glue:GetDatabases action (Service: AWSGlue; Status Code: 400; Error Code: AccessDeniedException;
+failed: User: arn:aws:sts::###:assumed-role/AmazonEMR-InstanceProfile-###/### is not authorized to perform: 
+glue:GetDatabases on resource: arn:aws:glue:region:###:catalog because no identity-based policy allows the 
+glue:GetDatabases action (Service: AWSGlue; Status Code: 400; Error Code: AccessDeniedException;
 ```
 You need to add AWS Glue permissions to the IAM role that your EMR/EC2 instances are using.
 
