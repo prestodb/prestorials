@@ -5,7 +5,7 @@
 This repo contains instructions for different ways to set up Presto and examples for how to connect to different data sources.
 We will also have video and written walkthroughs linked as we publish them.
 
-Give us a <font size="4">✪</font> if you want more of this content!
+Give us a <font size="4">🌟</font> if you want more of this content!
 
 ## How to navigate
 
@@ -26,8 +26,8 @@ We would love to hear from you, please create an issue for:
 
 ## Publication Plan
 
-Legend [ ✔ = published | <font size="3">✎</font> = drafting ]
+Legend [ ☑️ = published | ✏️ = drafting ]
 
-1. <font size="3">✎</font> How to connect Presto to AWS Glue 
-2. <font size="3">✎</font> How to run Presto on AWS
+1. ✏️ How to connect Presto to AWS Glue 
+2. ✏️ How to run Presto on AWS
 3. How to connect Presto to MongoDB
