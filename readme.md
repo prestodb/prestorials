@@ -30,12 +30,4 @@ Legend [ ✔ = published | <font size="3">✎</font> = drafting ]
 
 1. <font size="3">✎</font> How to connect Presto to AWS Glue 
 2. <font size="3">✎</font> How to run Presto on AWS
-3. How to connect Presto to MongoDB 
-4. How to run Presto on GCP 
-5. How to run Presto on Azure 
-6. How to run Presto on Linux 
-7. How to run Presto on MacOS 
-8. How to connect Presto to PostgresSQL 
-9. How to run Presto on Windows 
-10. How to connect Presto to MySQL 
-11. How to make your own connector for Presto
+3. How to connect Presto to MongoDB
