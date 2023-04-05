@@ -28,8 +28,9 @@ We would love to hear from you, please **[create an issue](https://github.com/pr
 
 ## Publication Plan
 
-Legend [ ☑️ = published | ✏️ = drafting ]
+Legend [ ☑️ = completed | ✏️ = drafting ]
 
 1. ✏️ [How to connect Presto to AWS Glue](https://github.com/prestodb/prestorials/tree/main/connecting%20Presto%20to%20data%20sources/connecting%20Presto%20to%20AWS%20Glue) 
 2. ✏️ [How to run Presto on AWS](https://github.com/prestodb/prestorials/tree/main/running%20Presto%20on%20cloud%20services/running%20Presto%20on%20AWS)
-3. How to connect Presto to MongoDB
+3. ✏️ [How to run Presto locally using Docker](https://github.com/prestodb/prestorials/tree/main/running%20Presto%20locally%20or%20on-prem/running%20Presto%20locally%20using%20Docker)
+4. How to connect Presto to MongoDB

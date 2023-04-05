@@ -20,8 +20,8 @@ Soon we will have a video walk-through as well as a written walk through in blog
 # Quick Start
 
 [Setting up Glue](#setup)
-[Query Glue from Presto running in EMR](#Use the Presto CLI to query from an EMR Presto Cluster)
-[Query Glue from Presto running outside of AWS (locally)](#Use the Presto CLI to query from outside of AWS)
+[Query Glue from Presto running in EMR](#Use-the-Presto-CLI-to-query-from-an-EMR-Presto-Cluster)
+[Query Glue from Presto running outside of AWS (locally)](#Use-the-Presto-CLI-to-query-from-outside-of-AWS)
 
 ## Setup
 
