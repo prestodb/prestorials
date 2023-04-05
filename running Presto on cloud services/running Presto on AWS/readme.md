@@ -3,14 +3,14 @@
 ## Introduction
 
 This folder example files and steps for standing up Presto on AWS.
-Soon we will have a video walkthrough as well as a written walk through in blog form.
+Soon we will have a video walk-through as well as a written walk through in blog form.
 
 There are four common ways to run Presto on AWS:
 
-1. Using Elastic MapReduce (EMR)
-2. Using Ahana Cloud 
-3. Using Marketplace AMI 
-4. Using Elastic Compute Cloud (EC2)
+1. [Using Elastic MapReduce (EMR)](#Running Presto using EMR)
+2. [Using Ahana Cloud](#Running Presto using Ahana Cloud)
+3. [Using Marketplace AMI](#Running Presto using Marketplace AMI)
+4. [Using Elastic Compute Cloud (EC2)](#Running Presto using EC2)
 
 ## Requirements
 
@@ -18,7 +18,7 @@ There are four common ways to run Presto on AWS:
 - A Cloud9 IDE workspace created
 - An EC2 Key Pair
 
-## [1] Running Presto using Elastic MapReduce (EMR)
+## Running Presto using EMR
 
 ### Provision the cluster
 1. Open the AWS Console and navigate to the EMR service
@@ -27,15 +27,15 @@ There are four common ways to run Presto on AWS:
 4. Under **Application Bundle** select **Presto**
 5. If you're using AWS Glue to catalog data, check the **☑️ Use for Presto table metadata** option
    1. *See tutorial for connecting to AWS Glue under the "connecting Presto to data sources" directory of this repo*
-2. Remove the **Task** instance group
-3. Set the Core instance group size to 2
-4. Under **Cluster termination** select manual or an appropriate idle time for your use case.
-5. Under **Security configuration and EC2 key pair** Select your EC2 key pair
-6. Under **Cluster logs** Select an S3 bucket in the same region as the cluster
-7. Under **Amazon EMR service role** select **Create a service role** and choose the appropriate security group, which may be **default**
-8. Under **EC2 instance profile for Amazon EMR** choose **Create an instance profile**
-9. Under **S3 bucket access** select **Specific S3 buckets or prefixes in your account**
-10. Click **Create cluster**
+6. Remove the **Task** instance group
+7. Set the Core instance group size to 2
+8. Under **Cluster termination** select manual or an appropriate idle time for your use case.
+9. Under **Security configuration and EC2 key pair** Select your EC2 key pair
+10. Under **Cluster logs** Select an S3 bucket in the same region as the cluster
+11. Under **Amazon EMR service role** select **Create a service role** and choose the appropriate security group, which may be **default**
+12. Under **EC2 instance profile for Amazon EMR** choose **Create an instance profile**
+13. Under **S3 bucket access** select **Specific S3 buckets or prefixes in your account**
+14. Click **Create cluster**
     1. It can take a few minutes to provision the cluster
 
 ## Presto Web UI with EMR
@@ -52,9 +52,9 @@ There are four common ways to run Presto on AWS:
    2. Click **add to Chrome/Brave**
    3. Click **New profile** on the left
    4. Set ```emr-socks-proxy``` as the name 
-   4. Select **PAC profile** (Proxy Auto-Configuration)
-   5. Click **Create** 
-   5. In the **PAC Script** text field, replace the contents with the following script.
+   5. Select **PAC profile** (Proxy Auto-Configuration)
+   6. Click **Create** 
+   7. In the **PAC Script** text field, replace the contents with the following script.
 
 ```
 function FindProxyForURL(url, host) { 
@@ -68,10 +68,10 @@ if (shExpMatch(url, "*ec2.internal*")) return 'SOCKS5 localhost:8157';
 return 'DIRECT';
 }
 ```
-   6. *NOTE: Replace 8157 with your port number if you specified a different number when you set up your tunnel*
-   7. Under **Actions** on the left, click **Apply changes**
-   8. In the Chrome/Brave toolbar, click the extension icon
-   9. Select **SwitchyOmega** and select the ```emr-socks-proxy``` profile
+   1. *NOTE: Replace 8157 with your port number if you specified a different number when you set up your tunnel*
+   2. Under **Actions** on the left, click **Apply changes**
+   3. In the Chrome/Brave toolbar, click the extension icon
+   4. Select **SwitchyOmega** and select the ```emr-socks-proxy``` profile
 
 #### Allow inbound SSH from trusted sources
 
@@ -80,11 +80,11 @@ return 'DIRECT';
 3. Under **Properties** tab locate the **Network and security** section
 4. Under **EC2 security groups (firewall)** you should see **Primary node** ***EMR managed security group***
 5. Click the link below to open the security group 
-4. Under the **Inbound rules** tab click **Edit inbound rules
-5. Scroll to the bottom and click **Add rule** and set the following
+6. Under the **Inbound rules** tab click **Edit inbound rules
+7. Scroll to the bottom and click **Add rule** and set the following
    1. ***Type***: **SSH**
-   7. ***Source Type***: **My IP**
-7. Click **Save rules**
+   2. ***Source Type***: **My IP**
+8. Click **Save rules**
 
 Congratulations!  You should now be able to access the Presto web UI from:
 ```
@@ -99,11 +99,17 @@ Which should show 2 active workers
 
 *coming soon*
 
-## [2] Running Presto using Ahana Cloud
+## Running Presto using Ahana Cloud
 
-## [3] Using Marketplace AMI
+*coming soon*
 
-## [4] Using Elastic Compute Cloud (EC2)
+## Running Presto using Marketplace AMI
+
+*coming soon*
+
+## Running Presto using EC2
+
+*coming soon*
 
 
 ## References

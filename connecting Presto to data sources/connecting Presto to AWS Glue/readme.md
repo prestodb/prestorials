@@ -14,30 +14,36 @@ Soon we will have a video walk-through as well as a written walk through in blog
   - Presto expects similar schemas to be in the same directory
   - If you are working with multiple data sets, separate them in S3 into different directories
   - Essentially, all files in a directory must have the same schema
-- [Presto running in AWS using EMR](https://github.com/prestodb/prestorials/tree/main/running%20Presto%20on%20cloud%20services/running%20Presto%20on%20AWS)
+- You have gone through [Presto running in AWS using EMR](https://github.com/prestodb/prestorials/tree/main/running%20Presto%20on%20cloud%20services/running%20Presto%20on%20AWS)
 - For connecting directly from your local machine ensure you've added proper permissions on the security group firewall
 
-## Quick Start
+# Quick Start
 
-### Create a glue crawler:
+[Setting up Glue](#setup)
+[Query Glue from Presto running in EMR](#Use the Presto CLI to query from an EMR Presto Cluster)
+[Query Glue from Presto running outside of AWS (locally)](#Use the Presto CLI to query from outside of AWS)
+
+## Setup
+
+### Create a glue crawler
 
 1. In the AWS Console navigate to AWS Glue 
 2. On the left select **Data Catalog** and then **Crawlers** and then click **Create crawler**
 3. Put ```prestorial_crawler``` for the **Name** under **Crawler Details** or anything that fits your planned use case
 4. Click **Next**
-4. On the **Choose data sources and classifiers** screen, click **Add a data source**
-5. Under Add a data store section, choose **S3** from the **Data source** drop-down Choose a data store
-6. Under **S3 path** either enter your full path or click **Browse S3** and navigate to your data bucket
-7. Click **Next**
-7. Below **Existing IAM role** select **Create an IAM role** and provide a name for the IAM role, for example ```prestorial_setup_role```
+5. On the **Choose data sources and classifiers** screen, click **Add a data source**
+6. Under Add a data store section, choose **S3** from the **Data source** drop-down Choose a data store
+7. Under **S3 path** either enter your full path or click **Browse S3** and navigate to your data bucket
 8. Click **Next**
-9. On the **Set output and scheduling** screen, under **Target database** click **Add database**
-10. Name the database something relevant to your use case or ```prestorial_db``` for now and click **Create database**
-8. Back on the **Set output and scheduling** screen towards the bottom, under **Crawler schedule** set the **Frequency** dropdown to **On demand**
-9. Click **Next**
-10. Review the steps and if everything looks correct click **Create crawler**
+9. Below **Existing IAM role** select **Create an IAM role** and provide a name for the IAM role, for example ```prestorial_setup_role```
+10. Click **Next**
+11. On the **Set output and scheduling** screen, under **Target database** click **Add database**
+12. Name the database something relevant to your use case or ```prestorial_db``` for now and click **Create database**
+13. Back on the **Set output and scheduling** screen towards the bottom, under **Crawler schedule** set the **Frequency** dropdown to **On demand**
+14. Click **Next**
+15. Review the steps and if everything looks correct click **Create crawler**
 
-### Run the crawler:
+### Run the crawler
 
 1. You should now be looking at the console for the crawler you just created
 2. Towards the top, click **Run crawler**
@@ -46,9 +52,9 @@ Soon we will have a video walk-through as well as a written walk through in blog
 5. If you don't see tables created for your data you may need to click the refresh circular arrow
 6. Open each of the tables created and verify that each column has been set to the correct data type
    1. AWS Glue tries its best to guess what the data for each field is but will typically default to string if it's unsure
-2. Edit the schema to correct any mistakes the Glue made
+7. Edit the schema to correct any mistakes the Glue made
 
-### Use the Presto CLI to query from an EMR Presto Cluster:
+## Use the Presto CLI to query from an EMR Presto Cluster
 
 If you setup [Presto running in AWS using EMR](https://github.com/prestodb/prestorials/tree/main/running%20Presto%20on%20cloud%20services/running%20Presto%20on%20AWS) then Presto is already configured to connect to Glue using the Hive connector.
 1. Use the following command to SSH into your EMR master node
@@ -76,6 +82,21 @@ glue:GetDatabases on resource: arn:aws:glue:region:###:catalog because no identi
 glue:GetDatabases action (Service: AWSGlue; Status Code: 400; Error Code: AccessDeniedException;
 ```
 You need to add AWS Glue permissions to the IAM role that your EMR/EC2 instances are using.
+
+## Use the Presto CLI to query from outside of AWS
+If you setup [Presto running locally using Docker Desktop](https://github.com/prestodb/prestorials/tree/main/running%20Presto%20on%20cloud%20services/running%20Presto%20on%20AWS)
+1. Use the following command to SSH into your EMR master node
+   ```ssh -i <<path-to-key-pair>> hadoop@<<emr-master-node-public-dns-address>>```
+2. Once connected, start the Presto CLI by sending the following command
+   ```presto-cli --catalog hive```
+3. List the schemas available from Glue with the following command
+   ```SHOW SCHEMAS;```
+4. List the tables available from a schema the following command replacing schema with one of those generated by Glue
+   ```SHOW TABLES FROM <<schema>>;```
+5. Query one of those tables like so, replacing schema and table
+   ```SELECT * FROM <<schema.table>> LIMIT 10;```
+6. Hit ```Q``` on your keyboard to exit the query results
+7. Type ```exit;``` to leave the Presto CLI
 
 ## References
 
