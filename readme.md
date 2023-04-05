@@ -3,6 +3,7 @@
 ## Introduction
 
 This repo contains instructions for different ways to set up Presto and examples for how to connect to different data sources.
+<br>
 We will also have video and written walk-throughs linked as we publish them.
 
 Give us a <font size="4">🌟</font> if you want more of this content!

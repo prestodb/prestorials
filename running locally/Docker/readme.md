@@ -2,7 +2,8 @@
 
 ## Introduction
 
-This folder example files and steps for standing up Presto using Docker Desktop.
+This folder contains example files and steps for standing up Presto using Docker.
+<br>
 Soon we will have a video walk-through as well as a written walk through in blog form.
 
 1. [Using Docker Desktop](#Running Presto using Docker Desktop)

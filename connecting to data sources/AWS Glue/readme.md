@@ -3,6 +3,7 @@
 ## Introduction
 
 This folder contains example files and steps for connecting Presto on AWS Glue.
+<br>
 Soon we will have a video walk-through as well as a written walk through in blog form.
 
 ## Requirements
