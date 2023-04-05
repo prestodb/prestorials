@@ -7,8 +7,8 @@ Soon we will have a video walk-through as well as a written walk through in blog
 
 There are four common ways to run Presto on AWS:
 
-1. [Using Elastic MapReduce (EMR)](#Running Presto using EMR)
-2. [Using Ahana Cloud](#Running Presto using Ahana Cloud)
+1. [Using Elastic MapReduce (EMR)](#running-presto-using-emr)
+2. [Using Ahana Cloud](#Running-Presto-using-Ahana-Cloud)
 3. [Using Marketplace AMI](#Running Presto using Marketplace AMI)
 4. [Using Elastic Compute Cloud (EC2)](#Running Presto using EC2)
 
