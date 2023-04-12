@@ -57,7 +57,8 @@ Soon we will have a video walk-through as well as a written walk through in blog
 
 ## Use the Presto CLI to query from an EMR Presto Cluster
 
-If you setup [Presto running in AWS using EMR](https://github.com/prestodb/prestorials/tree/main/running%20Presto%20on%20cloud%20services/running%20Presto%20on%20AWS) then Presto is already configured to connect to Glue using the Hive connector.
+### If you setup [Presto running in AWS using EMR](https://github.com/prestodb/prestorials/tree/main/running%20Presto%20on%20cloud%20services/running%20Presto%20on%20AWS) 
+Presto is already configured to connect to Glue using the Hive connector.
 1. Use the following command to SSH into your EMR master node
 ```ssh -i <<path-to-key-pair>> hadoop@<<emr-master-node-public-dns-address>>```
 2. Once connected, start the Presto CLI by sending the following command
