@@ -6,7 +6,7 @@ This Docker setup has:
 1. A MinIO container to provide out of the box local S3 storage. 
 2. A Hive container to connect MinIO with Presto
 
-## Currently supported platforms:
+## Currently supported platforms
 x86 Intel Mac
 Ubuntu Linux
 
