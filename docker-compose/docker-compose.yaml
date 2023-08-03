@@ -28,8 +28,8 @@ services:
       - ./catalog/tpcds.properties:/opt/presto-server/etc/catalog/tpcds.properties
       - ./catalog/tpch.properties:/opt/presto-server/etc/catalog/tpch.properties
     environment:
-      - AWS_ACCESS_KEY=${AWS_ACCESS_KEY}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      AWS_ACCESS_KEY: ${AWS_ACCESS_KEY}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://10.18.0.8:8080"]
       interval: 5m
@@ -59,8 +59,8 @@ services:
       - ./catalog/tpcds.properties:/opt/presto-server/etc/catalog/tpcds.properties
       - ./catalog/tpch.properties:/opt/presto-server/etc/catalog/tpch.properties
     environment:
-      - AWS_ACCESS_KEY=${AWS_ACCESS_KEY}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      AWS_ACCESS_KEY: ${AWS_ACCESS_KEY}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
     networks:
       presto:
         ipv4_address: 10.18.0.18
@@ -84,8 +84,8 @@ services:
       - ./catalog/tpcds.properties:/opt/presto-server/etc/catalog/tpcds.properties
       - ./catalog/tpch.properties:/opt/presto-server/etc/catalog/tpch.properties
     environment:
-      - AWS_ACCESS_KEY=${AWS_ACCESS_KEY}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      AWS_ACCESS_KEY: ${AWS_ACCESS_KEY}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
     networks:
       presto:
         ipv4_address: 10.18.0.28
