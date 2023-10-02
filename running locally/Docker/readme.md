@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This folder contains example files and steps for standing up Presto using Docker.
+This folder contains example files and steps for setting up Presto using Docker.
 <br>
 Soon we will have a video walk-through as well as a written walk through in blog form.
 
@@ -71,7 +71,7 @@ discovery.uri=http://coordinator:8080
 7. Hit the ```i``` key to edit the file shown
 8. Set coordinator to false ```coordinator=false```
 9. Remove the ```node-scheduler.include-coordinator=true``` line
-10. Set http.port to 8081 ```http-server.http.port=8082```
+10. Set http.port to 8082 ```http-server.http.port=8082```
 11. Remove the ```discovery-server.enabled=true``` line
 12. Set the discovery uri to http://coordinator:8080 ```discovery.uri=http://coordinator:8080```
     <br>Your file should now look like this
@@ -90,7 +90,7 @@ discovery.uri=http://coordinator:8080
 7. Hit the ```i``` key to edit the file shown
 8. Set coordinator to false ```coordinator=false```
 9. Remove the ```node-scheduler.include-coordinator=true``` line
-10. Set http.port to 8081 ```http-server.http.port=8083```
+10. Set http.port to 8083 ```http-server.http.port=8083```
 11. Remove the ```discovery-server.enabled=true``` line
 12. Set the discovery uri to http://coordinator:8080 ```discovery.uri=http://coordinator:8080```
     <br>Your file should now look like this
@@ -111,7 +111,7 @@ discovery.uri=http://coordinator:8080
 Using the steps above you can add as many worker nodes as you need to scale.
 
 ## Running Presto using Docker CLI
-### Standup the cluster
+### Setup the cluster
 *coming soon*
 
 
