@@ -68,7 +68,7 @@ services:
         ipv4_address: 172.19.0.4
   worker_1:
     container_name: worker_1
-    image: prestodb/presto-native:0.283-dev
+    image: public.ecr.aws/oss-presto/presto-native:0.286-20231205020058-ada5eb3-amd64
     platform: linux/amd64
     restart: always
     deploy:
