@@ -42,3 +42,7 @@ You can monitor the logs of different containers in the terminal and Docker Desk
 
 ## Run Presto CLI
     docker exec -it coordinator /opt/presto-cli --server http://127.0.0.1:8080
+
+## Stop and delete the cluster
+    ctrl-c
+    docker compose -f docker-compose-2-mysql.yaml down
