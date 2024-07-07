@@ -47,7 +47,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2G
+          memory: 4G
     volumes:
       - ./workers/config.properties:/opt/presto-server/etc/config.properties
       - ./workers/jvm.config:/opt/presto-server/etc/jvm.config
@@ -71,7 +71,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2G
+          memory: 4G
     volumes:
       - ./workers/config.properties:/opt/presto-server/etc/config.properties
       - ./workers/jvm.config:/opt/presto-server/etc/jvm.config

@@ -4,6 +4,7 @@ This is a sample setup to run a Presto cluster with 1 coordinator and 2 workers.
 ## Requirements
 * Mac OS X or Linux, with minimum 10G memory and 50G free disk space
 * Docker Desktop 4.10.1 (Engine: 24.0.2, Compose: v2.18.1) and above
+* At least 10G free memory on your machine
 
 ## Update catalog configurations
 * Update `mysql.properties`, `postgresql.properties`, `hive.properties` and/or `glue.properties` if you need to.
