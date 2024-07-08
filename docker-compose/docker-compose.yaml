@@ -9,7 +9,7 @@ networks:
 services:
   coordinator:
     container_name: coordinator
-    image: prestodb/presto:0.286
+    image: prestodb/presto:latest
     platform: linux/amd64
     restart: always
     deploy:
@@ -37,7 +37,7 @@ services:
 
   worker_1:
     container_name: worker_1
-    image: prestodb/presto:0.286
+    image: prestodb/presto:latest
     platform: linux/amd64
     restart: always
     depends_on:
@@ -45,7 +45,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2G
+          memory: 4G
     volumes:
       - ./workers/config.properties:/opt/presto-server/etc/config.properties
       - ./workers/jvm.config:/opt/presto-server/etc/jvm.config
@@ -59,7 +59,7 @@ services:
   
   worker_2:
     container_name: worker_2
-    image: prestodb/presto:0.286
+    image: prestodb/presto:latest
     platform: linux/amd64
     restart: always
     depends_on:
@@ -67,7 +67,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2G
+          memory: 4G
     volumes:
       - ./workers/config.properties:/opt/presto-server/etc/config.properties
       - ./workers/jvm.config:/opt/presto-server/etc/jvm.config
