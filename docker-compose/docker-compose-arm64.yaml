@@ -10,7 +10,7 @@ services:
   coordinator:
     container_name: coordinator
     image: prestodb/presto:latest
-    platform: linux/amd64
+    platform: linux/arm64
     restart: always
     deploy:
       resources:
@@ -40,7 +40,7 @@ services:
   worker_1:
     container_name: worker_1
     image: prestodb/presto:latest
-    platform: linux/amd64
+    platform: linux/arm64
     restart: always
     depends_on:
       - coordinator
@@ -64,7 +64,7 @@ services:
   worker_2:
     container_name: worker_2
     image: prestodb/presto:latest
-    platform: linux/amd64
+    platform: linux/arm64
     restart: always
     depends_on:
       - coordinator
