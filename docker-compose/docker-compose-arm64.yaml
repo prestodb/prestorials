@@ -55,7 +55,7 @@ services:
       - ./catalog/jmx.properties:/opt/presto-server/etc/catalog/jmx.properties
       - ./catalog/tpcds.properties:/opt/presto-server/etc/catalog/tpcds.properties
       - ./catalog/tpch.properties:/opt/presto-server/etc/catalog/tpch.properties
-      - ./catalog/hive.properties:/opt/presto-server/etc/catalog/hive.properties
+      - ./catalog/hive_file.properties:/opt/presto-server/etc/catalog/hive.properties
       - ./data:/home
     networks:
       presto:
@@ -79,7 +79,7 @@ services:
       - ./catalog/jmx.properties:/opt/presto-server/etc/catalog/jmx.properties
       - ./catalog/tpcds.properties:/opt/presto-server/etc/catalog/tpcds.properties
       - ./catalog/tpch.properties:/opt/presto-server/etc/catalog/tpch.properties
-      - ./catalog/hive.properties:/opt/presto-server/etc/catalog/hive.properties
+      - ./catalog/hive_file.properties:/opt/presto-server/etc/catalog/hive.properties
       - ./data:/home
     networks:
       presto:

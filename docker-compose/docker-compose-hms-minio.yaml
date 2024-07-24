@@ -60,7 +60,6 @@ services:
       - ./catalog/tpcds.properties:/opt/presto-server/etc/catalog/tpcds.properties
       - ./catalog/tpch.properties:/opt/presto-server/etc/catalog/tpch.properties
       - ./catalog/hive.properties:/opt/presto-server/etc/catalog/hive.properties
-      - ./data/create-tpcdssf1-parquet-hive.sql:/opt/create-tpcdssf1-parquet-hive.sql
     healthcheck:
       test: ["CMD", "curl", "-f", "http://10.18.0.8:8080"]
       interval: 5m
