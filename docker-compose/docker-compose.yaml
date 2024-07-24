@@ -25,6 +25,8 @@ services:
       - ./catalog/jmx.properties:/opt/presto-server/etc/catalog/jmx.properties
       - ./catalog/tpcds.properties:/opt/presto-server/etc/catalog/tpcds.properties
       - ./catalog/tpch.properties:/opt/presto-server/etc/catalog/tpch.properties
+      - ./catalog/hive_file.properties:/opt/presto-server/etc/catalog/hive.properties
+      - ./data:/home
     healthcheck:
       test: ["CMD", "curl", "-f", "http://10.18.0.8:8080"]
       interval: 5m
@@ -53,6 +55,8 @@ services:
       - ./catalog/jmx.properties:/opt/presto-server/etc/catalog/jmx.properties
       - ./catalog/tpcds.properties:/opt/presto-server/etc/catalog/tpcds.properties
       - ./catalog/tpch.properties:/opt/presto-server/etc/catalog/tpch.properties
+      - ./catalog/hive_file.properties:/opt/presto-server/etc/catalog/hive.properties
+      - ./data:/home
     networks:
       presto:
         ipv4_address: 10.18.0.18
@@ -75,6 +79,8 @@ services:
       - ./catalog/jmx.properties:/opt/presto-server/etc/catalog/jmx.properties
       - ./catalog/tpcds.properties:/opt/presto-server/etc/catalog/tpcds.properties
       - ./catalog/tpch.properties:/opt/presto-server/etc/catalog/tpch.properties
+      - ./catalog/hive_file.properties:/opt/presto-server/etc/catalog/hive.properties
+      - ./data:/home
     networks:
       presto:
         ipv4_address: 10.18.0.28
