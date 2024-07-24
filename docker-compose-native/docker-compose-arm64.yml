@@ -19,7 +19,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - /tmp/data:/home
+      - ./prestissimo/data:/home
       - ./prestissimo/coordinator/log.properties:/opt/presto-server/etc/log.properties
       - ./prestissimo/coordinator/config.properties:/opt/presto-server/etc/config.properties
       - ./prestissimo/coordinator/jvm.config:/opt/presto-server/etc/jvm.config
@@ -48,7 +48,7 @@ services:
     ports:
       - 8081:8081
     volumes:
-      - /tmp/data:/home
+      - ./prestissimo/data:/home
       - ./prestissimo/coordinator/log.properties:/opt/presto-server/etc/log.properties
       - ./prestissimo/workers/config_1.properties:/opt/presto-server/etc/config.properties
       - ./prestissimo/workers/node_1.properties:/opt/presto-server/etc/node.properties
@@ -69,7 +69,7 @@ services:
     ports:
       - 8082:8082
     volumes:
-      - /tmp/data:/home
+      - ./prestissimo/data:/home
       - ./prestissimo/coordinator/log.properties:/opt/presto-server/etc/log.properties
       - ./prestissimo/workers/config_2.properties:/opt/presto-server/etc/config.properties
       - ./prestissimo/workers/node_2.properties:/opt/presto-server/etc/node.properties
