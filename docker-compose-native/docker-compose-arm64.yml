@@ -1,43 +1,16 @@
-version: '3.8'
-services:
-  minio:
-    hostname: minio-server
-    image: 'minio/minio:latest'
-    container_name: minio-server
-    command: server --console-address ":9001" /minio
-    ports:
-      - 9000:9000
-      - 9001:9001
-    environment:
-      AWS_ACCESS_KEY_ID: minioadmin
-      AWS_SECRET_ACCESS_KEY: minioadmin
-    volumes:
-      - ./minio/data:/minio
-    networks:
-      presto:
-        ipv4_address: 172.19.0.2
+networks:
+  presto:
+    driver: bridge
+    ipam:
+      config:
+        - subnet:  172.19.0.0/24
+          gateway: 172.19.0.1
 
-  hadoop:
-    hostname: hadoop-master
-    image: 'prestodb/hive3.1-hive:10'
-    container_name: hadoop-master
-    environment:
-      AWS_ACCESS_KEY_ID: minioadmin
-      AWS_SECRET_ACCESS_KEY: minioadmin
-    volumes:
-      - ./hadoop/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
-    ports:
-      - 9083:9083
-    depends_on:
-      - minio
-    networks:
-      presto:
-        ipv4_address: 172.19.0.3
-
+services:    
   coordinator:
     container_name: coordinator
     image: prestodb/presto:latest
-    platform: linux/amd64
+    platform: linux/arm64
     restart: always
     deploy:
       resources:
@@ -46,17 +19,13 @@ services:
     ports:
       - 8080:8080
     volumes:
+      - /tmp/data:/home
       - ./prestissimo/coordinator/log.properties:/opt/presto-server/etc/log.properties
       - ./prestissimo/coordinator/config.properties:/opt/presto-server/etc/config.properties
       - ./prestissimo/coordinator/jvm.config:/opt/presto-server/etc/jvm.config
       - ./prestissimo/coordinator/node.properties:/opt/presto-server/etc/node.properties
-      - ./prestissimo/coordinator/catalog/hive.properties:/opt/presto-server/etc/catalog/hive.properties
-    depends_on:
-      - minio
-      - hadoop
-    environment:
-      - AWS_ACCESS_KEY=${AWS_ACCESS_KEY}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - ./prestissimo/coordinator/catalog/hive_file.properties:/opt/presto-server/etc/catalog/hive.properties
+      - ./prestissimo/coordinator/catalog/tpch.properties:/opt/presto-server/etc/catalog/tpch.properties
     healthcheck:
       test: ["CMD", "curl", "-f", "http://172.19.0.4:8080"]
       interval: 5m
@@ -69,8 +38,8 @@ services:
 
   worker_1:
     container_name: worker_1
-    image: public.ecr.aws/oss-presto/presto-native:0.288
-    platform: linux/amd64
+    image: public.ecr.aws/oss-presto/presto-native:0.289-ubuntu-arm64
+    platform: linux/arm64
     restart: always
     deploy:
       resources:
@@ -79,24 +48,19 @@ services:
     ports:
       - 8081:8081
     volumes:
+      - /tmp/data:/home
       - ./prestissimo/coordinator/log.properties:/opt/presto-server/etc/log.properties
       - ./prestissimo/workers/config_1.properties:/opt/presto-server/etc/config.properties
       - ./prestissimo/workers/node_1.properties:/opt/presto-server/etc/node.properties
       - ./prestissimo/workers/catalog/hive.properties:/opt/presto-server/etc/catalog/hive.properties
-    depends_on:
-      - minio
-      - hadoop
-    environment:
-      - AWS_ACCESS_KEY=${AWS_ACCESS_KEY}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
     networks:
       presto:
         ipv4_address: 172.19.0.11
 
   worker_2:
     container_name: worker_2
-    image: public.ecr.aws/oss-presto/presto-native:0.288
-    platform: linux/amd64
+    image: public.ecr.aws/oss-presto/presto-native:0.289-ubuntu-arm64
+    platform: linux/arm64
     restart: always
     deploy:
       resources:
@@ -105,6 +69,7 @@ services:
     ports:
       - 8082:8082
     volumes:
+      - /tmp/data:/home
       - ./prestissimo/coordinator/log.properties:/opt/presto-server/etc/log.properties
       - ./prestissimo/workers/config_2.properties:/opt/presto-server/etc/config.properties
       - ./prestissimo/workers/node_2.properties:/opt/presto-server/etc/node.properties
@@ -112,12 +77,3 @@ services:
     networks:
       presto:
         ipv4_address: 172.19.0.12
-
-networks:
-  presto:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-      - subnet:  172.19.0.0/24
-        gateway: 172.19.0.1
