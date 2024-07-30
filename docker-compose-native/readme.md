@@ -16,4 +16,4 @@ It does take some time for the Prestissimo worker to be hooked up with the Prest
 
 To bring the Docker containers down, run `docker compose down` or `ctrl+c` on the current terminal where you ran `docker compose up`.
 
-The file `docker-compose-arm64.yml` uses the `linux/arm64` Presto images and the file-based hive metastore. This docker compose file can be used on silicon based Macs with command `docker compose -f docker-compose-arm64.yml up`. The config for file-based hive connector is present in `hive_file.properties` and requires the data to be copied into the directory `prestissimo/data` beforehand. 
+The file `docker-compose-arm64.yaml` uses the `linux/arm64` Presto images and the file-based hive metastore. This docker compose file can be used on silicon based Macs with command `docker compose -f docker-compose-arm64.yaml up`. The config for file-based hive connector is present in `hive_file.properties` and requires the data to be copied into the directory `prestissimo/data` beforehand. 

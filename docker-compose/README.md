@@ -9,8 +9,8 @@ This is a sample setup to run a Presto cluster with 1 coordinator and 2 workers.
 ## Update catalog configurations
 * Update `mysql.properties`, `postgresql.properties`, `hive.properties` and/or `glue.properties` if you need to.
 * Add catalogs of other connectors if you need to.
-* Update `volumes` sections in `docker-compose.yml` to mount catalog files accordingly.
-* Update `environment` sections in `docker-compose.yml` to inject required environment variables into Presto proceses.
+* Update `volumes` sections in `docker-compose.yaml` to mount catalog files accordingly.
+* Update `environment` sections in `docker-compose.yaml` to inject required environment variables into Presto proceses.
 
 ## Start a Presto cluster
 Open a terminal, and change into this directory ($REPO_ROOT/docker-compose/).
@@ -38,7 +38,7 @@ You can monitor the logs of different containers in the terminal and Docker Desk
 ## Start a Presto cluster
 Open a terminal, and change into this directory ($REPO_ROOT/docker-compose/).
 
-    docker compose -f docker-compose-2-mysql.yml up
+    docker compose -f docker-compose-2-mysql.yaml up
 You can monitor the logs of different containers in the terminal and Docker Desktop UI.
 
 ## Run Presto CLI
@@ -46,7 +46,7 @@ You can monitor the logs of different containers in the terminal and Docker Desk
 
 ## Stop and delete the cluster
     ctrl-c
-    docker compose -f docker-compose-2-mysql.yml down
+    docker compose -f docker-compose-2-mysql.yaml down
 
 
 ## Commands and Outputs

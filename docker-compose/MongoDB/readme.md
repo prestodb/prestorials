@@ -22,7 +22,7 @@ Make sure you have Docker and Docker Compose installed on your system. You can d
 
 ### Step 2: Create a Docker Compose file
 
-Open a text editor and create a file named ``` docker-compose.yml ```.
+Open a text editor and create a file named ``` docker-compose.yaml ```.
 Add the following content to the file:
 ```
 ---
@@ -58,7 +58,7 @@ volumes:
 ```
 
 #### Save the Docker Compose file
-   -Save the docker-compose.yml file in a directory of your choice.
+   -Save the docker-compose.yaml file in a directory of your choice.
 
 ### Step 3: Start the containers
 
