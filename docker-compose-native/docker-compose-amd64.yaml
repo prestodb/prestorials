@@ -38,7 +38,7 @@ services:
 
   worker_1:
     container_name: worker_1
-    image: public.ecr.aws/oss-presto/presto-native:0.289-20240730093050-e08486b
+    image: public.ecr.aws/oss-presto/presto-native:0.289-20240719122003-30c4804
     platform: linux/amd64
     restart: always
     deploy:
@@ -59,7 +59,7 @@ services:
 
   worker_2:
     container_name: worker_2
-    image: public.ecr.aws/oss-presto/presto-native:0.289-20240730093050-e08486b
+    image: public.ecr.aws/oss-presto/presto-native:0.289-20240719122003-30c4804
     platform: linux/amd64
     restart: always
     deploy:
