@@ -1,8 +1,8 @@
 # Getting Started with Docker setup with Presto coordinator, Presto C++ worker, Hive, MinIO
 
 This Docker setup has:
-1. A Presto coordinator to coordinate Presto or Prestissimo workers
-2. A Prestissimo worker to run the queries
+1. A Presto coordinator to coordinate Presto or Presto C++ workers
+2. A Presto C++ worker to run the queries
 3. A MinIO container to provide out of the box local S3 storage. 
 4. A Hive container to connect MinIO with Presto
 
