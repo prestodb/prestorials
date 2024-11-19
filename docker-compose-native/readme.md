@@ -1,4 +1,4 @@
-# Getting Started with Docker setup with Presto coordinator, Prestissimo worker, Hive, MinIO
+# Getting Started with Docker setup with Presto coordinator, Presto C++ worker, Hive, MinIO
 
 This Docker setup has:
 1. A Presto coordinator to coordinate Presto or Prestissimo workers
