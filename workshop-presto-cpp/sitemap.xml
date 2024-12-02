@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://prestodb.github.io/prestorials/</loc>
+         <lastmod>2024-12-02</lastmod>
+    </url>
+    <url>
+         <loc>https://prestodb.github.io/prestorials/deploy-presto/</loc>
+         <lastmod>2024-12-02</lastmod>
+    </url>
+    <url>
+         <loc>https://prestodb.github.io/prestorials/resources/CONTRIBUTORS/</loc>
+         <lastmod>2024-12-02</lastmod>
+    </url>
+    <url>
+         <loc>https://prestodb.github.io/prestorials/resources/RESOURCES/</loc>
+         <lastmod>2024-12-02</lastmod>
+    </url>
+    <url>
+         <loc>https://prestodb.github.io/prestorials/running-pbench/</loc>
+         <lastmod>2024-12-02</lastmod>
+    </url>
+</urlset>
