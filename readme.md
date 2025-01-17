@@ -18,6 +18,11 @@ Up above you'll see directories for different topics, and inside each directory 
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;↳ ```AWS```
 
+## Requirements
+Mac OS X or Linux, with minimum 10G memory and 50G free disk space
+Docker Desktop 4.10.1 (Engine: 24.0.2, Compose: v2.18.1) and above
+At least 10G free memory is required on your machine.
+
 ## Suggestions and Feedback
 
 We would love to hear from you, please **[create an issue](https://github.com/prestodb/prestorials/issues/new/choose)** for:
