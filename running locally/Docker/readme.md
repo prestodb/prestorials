@@ -17,11 +17,11 @@ This folder contains example files and steps for setting up Presto using Docker.
 ### Network and container staging
 1. Open a Terminal and start by creating a network for the nodes to communicate with each other
 ```docker network create presto_network```
-2. Download a Docker container. For this exercise, use the Presto Sandbox container provided by [Ahana](https://ahana.io/)
-```docker pull ahanaio/prestodb-sandbox```
+2. Download the [Presto Docker container](https://hub.docker.com/r/prestodb/presto).
+```docker pull prestodb/presto```
 
 ### Setup the Coordinator
-```docker run -d -p 8080:8080 -it --net presto_network --name coordinator ahanaio/prestodb-sandbox```
+```docker run -d -p 8080:8080 -it --net presto_network --name coordinator prestodb/presto```
 1. Open Docker Desktop and select the **Containers** section on the left
 2. You should see the coordinator container running, select the name ```coordinator```
 3. You should see the Logs, select the **Terminal** tab
@@ -35,9 +35,9 @@ This folder contains example files and steps for setting up Presto using Docker.
 ### Setup 3 Worker Nodes
 1. In your terminal run the following commands to spin up 3 worker nodes with different ports
 ```
-docker run -d -p 8081:8081 -it --net presto_network --name worker1 ahanaio/prestodb-sandbox
-docker run -d -p 8082:8082 -it --net presto_network --name worker2 ahanaio/prestodb-sandbox
-docker run -d -p 8083:8083 -it --net presto_network --name worker3 ahanaio/prestodb-sandbox
+docker run -d -p 8081:8081 -it --net presto_network --name worker1 prestodb/presto
+docker run -d -p 8082:8082 -it --net presto_network --name worker2 prestodb/presto
+docker run -d -p 8083:8083 -it --net presto_network --name worker3 prestodb/presto
 ```
 
 For each container you must edit the configuraton properties:
@@ -121,16 +121,16 @@ The setup using Docker CLI is similar to the setup using Docker Desktop.
 ### Network and container staging
 1. Open a Terminal and start by creating a network for the nodes to communicate with each other
    ```docker network create presto_network```
-2. Download a container, for this exercise use the Presto Sandbox container provided by [Ahana](https://ahana.io/)
-   ```docker pull ahanaio/prestodb-sandbox```
+2. Download a container, for this exercise use the [Presto container](https://hub.docker.com/r/prestodb/presto)
+   ```docker pull prestodb/presto```
 
 ### Setup the Coordinator
 
-```docker run -d -p 8080:8080 -it --net presto_network --name coordinator ahanaio/prestodb-sandbox```
+```docker run -d -p 8080:8080 -it --net presto_network --name coordinator prestodb/presto```
 
 1. List the running containers issuing the command ```docker ps```. The ouput should look like this:
 ```
-87dfc138ccf9  ahanaio/prestodb-sandbox "/opt/entrypoint.sh …"   55 minutes ago  Up 23 minutes  0.0.0.0:8080->8080/tcp, :::8080->8080/tcp  coordinator
+87dfc138ccf9  prestodb/presto "/opt/entrypoint.sh …"   55 minutes ago  Up 23 minutes  0.0.0.0:8080->8080/tcp, :::8080->8080/tcp  coordinator
 ```
 2. To edit the config.properties file for this container to run as a coordinator, login to the container and edit the config.properties file as follows: 
 ```
@@ -151,9 +151,9 @@ vi /opt/presto-server/etc/config.properties
 ### Setup 3 Worker Nodes
 1. In your terminal run the following commands to spin up 3 worker nodes with different ports
 ```
-docker run -d -p 8081:8081 -it --net presto_network --name worker1 ahanaio/prestodb-sandbox
-docker run -d -p 8082:8082 -it --net presto_network --name worker2 ahanaio/prestodb-sandbox
-docker run -d -p 8083:8083 -it --net presto_network --name worker3 ahanaio/prestodb-sandbox
+docker run -d -p 8081:8081 -it --net presto_network --name worker1 prestodb/presto
+docker run -d -p 8082:8082 -it --net presto_network --name worker2 prestodb/presto
+docker run -d -p 8083:8083 -it --net presto_network --name worker3 prestodb/presto
 ```
 If you are running these commands on an Apple Silicon (M1 or M2) system, you may see the following warning for each command: 
 ```
@@ -190,10 +190,10 @@ discovery.uri=http://coordinator:8080
 10. Restart the container ```docker restart worker<n>```
 11. Check that all three workers are up and running again ```docker ps```. The output should look like this one
 ```
-cfc933542b4a   ahanaio/prestodb-sandbox   "/opt/entrypoint.sh …"   11 days ago   Up 11 days   8080/tcp, 0.0.0.0:8083->8083/tcp, :::8083->8083/tcp   worker3
-4cb6d6976b0b   ahanaio/prestodb-sandbox   "/opt/entrypoint.sh …"   11 days ago   Up 11 days   8080/tcp, 0.0.0.0:8082->8082/tcp, :::8082->8082/tcp   worker2
-91e80fce7b20   ahanaio/prestodb-sandbox   "/opt/entrypoint.sh …"   11 days ago   Up 11 days   8080/tcp, 0.0.0.0:8081->8081/tcp, :::8081->8081/tcp   worker1
-87dfc138ccf9   ahanaio/prestodb-sandbox   "/opt/entrypoint.sh …"   11 days ago   Up 11 days   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp
+cfc933542b4a   prestodb/presto   "/opt/entrypoint.sh …"   11 days ago   Up 11 days   8080/tcp, 0.0.0.0:8083->8083/tcp, :::8083->8083/tcp   worker3
+4cb6d6976b0b   prestodb/presto   "/opt/entrypoint.sh …"   11 days ago   Up 11 days   8080/tcp, 0.0.0.0:8082->8082/tcp, :::8082->8082/tcp   worker2
+91e80fce7b20   prestodb/presto   "/opt/entrypoint.sh …"   11 days ago   Up 11 days   8080/tcp, 0.0.0.0:8081->8081/tcp, :::8081->8081/tcp   worker1
+87dfc138ccf9   prestodb/presto   "/opt/entrypoint.sh …"   11 days ago   Up 11 days   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp
 ```
 12. Open a browser window to ```http://localhost:8080/```. You should see 3 active workers ready
 ![Presto Web UI showing 3 active workers](./screenshots/presto_docker_local_ready.png)
