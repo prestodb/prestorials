@@ -6,7 +6,7 @@ This folder contains example files and steps for standing up Presto on AWS.
 <br>
 Soon we will have a video walk-through as well as a written walk through in blog form.
 
-There are four common ways to run Presto on AWS:
+There are three common ways to run Presto on AWS:
 
 1. [Using Elastic MapReduce (EMR)](#running-presto-using-emr)
 3. [Using Marketplace AMI](#Running-Presto-using-Marketplace-AMI)
