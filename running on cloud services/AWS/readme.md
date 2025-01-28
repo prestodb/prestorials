@@ -9,7 +9,6 @@ Soon we will have a video walk-through as well as a written walk through in blog
 There are four common ways to run Presto on AWS:
 
 1. [Using Elastic MapReduce (EMR)](#running-presto-using-emr)
-2. [Using Ahana Cloud](#Running-Presto-using-Ahana-Cloud)
 3. [Using Marketplace AMI](#Running-Presto-using-Marketplace-AMI)
 4. [Using Elastic Compute Cloud (EC2)](#Running-Presto-using-EC2)
 
@@ -97,10 +96,6 @@ Which should show 2 active workers
 *<p align="center">Screenshot of Presto Web UI showing 2 active workers</p>*
 
 ### ***Steps for Windows***
-
-*coming soon*
-
-## Running Presto using Ahana Cloud
 
 *coming soon*
 
