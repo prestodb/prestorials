@@ -1,0 +1,89 @@
+networks:
+  presto:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.18.0.0/24
+          gateway: 10.18.0.1
+
+services:
+  coordinator:
+    container_name: coordinator
+    image: prestodb/presto:latest
+    platform: linux/amd64
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+    ports:
+      - 8080:8080
+    volumes:
+      - ./data:/home
+      - ./configs/coordinator/config.properties:/opt/presto-server/etc/config.properties
+      - ./configs/coordinator/jvm.config:/opt/presto-server/etc/jvm.config
+      - ./configs/coordinator/node.properties:/opt/presto-server/etc/node.properties
+      - ./configs/catalog/jmx.properties:/opt/presto-server/etc/catalog/jmx.properties
+      - ./configs/catalog/tpcds.properties:/opt/presto-server/etc/catalog/tpcds.properties
+      - ./configs/catalog/tpch.properties:/opt/presto-server/etc/catalog/tpch.properties
+      - ./configs/catalog/hive.properties:/opt/presto-server/etc/catalog/hive.properties
+      - ./configs/catalog/iceberg.properties:/opt/presto-server/etc/catalog/iceberg.properties
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://10.18.0.8:8080"]
+      interval: 5m
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks:
+      presto:
+        ipv4_address: 10.18.0.8
+
+  worker_1:
+    container_name: worker_1
+    image: prestodb/presto:latest
+    platform: linux/amd64
+    restart: always
+    depends_on:
+      - coordinator
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+    volumes:
+      - ./data:/home
+      - ./configs/workers/config.properties:/opt/presto-server/etc/config.properties
+      - ./configs/workers/jvm.config:/opt/presto-server/etc/jvm.config
+      - ./configs/workers/node_1.properties:/opt/presto-server/etc/node.properties
+      - ./configs/catalog/jmx.properties:/opt/presto-server/etc/catalog/jmx.properties
+      - ./configs/catalog/tpcds.properties:/opt/presto-server/etc/catalog/tpcds.properties
+      - ./configs/catalog/tpch.properties:/opt/presto-server/etc/catalog/tpch.properties
+      - ./configs/catalog/hive.properties:/opt/presto-server/etc/catalog/hive.properties
+      - ./configs/catalog/iceberg.properties:/opt/presto-server/etc/catalog/iceberg.properties
+    networks:
+      presto:
+        ipv4_address: 10.18.0.18
+
+  worker_2:
+    container_name: worker_2
+    image: prestodb/presto:latest
+    platform: linux/amd64
+    restart: always
+    depends_on:
+      - coordinator
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+    volumes:
+      - ./data:/home
+      - ./configs/workers/config.properties:/opt/presto-server/etc/config.properties
+      - ./configs/workers/jvm.config:/opt/presto-server/etc/jvm.config
+      - ./configs/workers/node_2.properties:/opt/presto-server/etc/node.properties
+      - ./configs/catalog/jmx.properties:/opt/presto-server/etc/catalog/jmx.properties
+      - ./configs/catalog/tpcds.properties:/opt/presto-server/etc/catalog/tpcds.properties
+      - ./configs/catalog/tpch.properties:/opt/presto-server/etc/catalog/tpch.properties
+      - ./configs/catalog/hive.properties:/opt/presto-server/etc/catalog/hive.properties
+      - ./configs/catalog/iceberg.properties:/opt/presto-server/etc/catalog/iceberg.properties
+    networks:
+      presto:
+        ipv4_address: 10.18.0.28
