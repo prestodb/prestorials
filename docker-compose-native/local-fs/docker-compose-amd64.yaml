@@ -24,8 +24,8 @@ services:
       - ./configs/coordinator/config.properties:/opt/presto-server/etc/config.properties
       - ./configs/coordinator/jvm.config:/opt/presto-server/etc/jvm.config
       - ./configs/coordinator/node.properties:/opt/presto-server/etc/node.properties
-      - ./configs/coordinator/catalog/hive_file.properties:/opt/presto-server/etc/catalog/hive.properties
-      - ./configs/coordinator/catalog/iceberg_file.properties:/opt/presto-server/etc/catalog/iceberg.properties
+      - ./configs/coordinator/catalog/hive.properties:/opt/presto-server/etc/catalog/hive.properties
+      - ./configs/coordinator/catalog/iceberg.properties:/opt/presto-server/etc/catalog/iceberg.properties
     healthcheck:
       test: ["CMD", "curl", "-f", "http://172.19.0.4:8080"]
       interval: 5m
