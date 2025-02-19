@@ -1,0 +1,132 @@
+# ELASTICSEARCH CONNECTOR TUTORIAL
+
+## Overview
+
+The Elasticsearch Connector allows access to Elasticsearch data from Presto. This tutorial describes how to set up the Elasticsearch Connector to run SQL queries against Elasticsearch.
+
+### Note:
+Elasticsearch 6.0.0 or later is required.
+
+## Installation
+
+Step 1: Install Elasticsearch
+
+Download and extract Elasticsearch
+
+## Note:
+This tutorial was tested with Elasticsearch Version: 8.8.1
+
+Run the Elasticsearch with the following command
+
+
+$ bin/elasticsearch
+[2023-06-21T11:14:25,557][INFO ][o.e.n.Node               ] [ip-172-31-18-24.ap-south-1.compute.internal] version[8.8.1], pid[6057], build[tar/f8edfccba429b6477927a7c1ce1bc6729521305e/2023-06-05T21:32:25.188464208Z], OS[Linux/6.1.29-50.88.amzn2023.x86_64/amd64], JVM[Oracle Corporation/OpenJDK 64-Bit Server VM/20.0.1/20.0.1+9-29]
+....
+
+This will start the  Elasticsearch on port 9200
+
+
+## Interacting with ElasticSearch:
+
+To check whether ElasticSearch has correctly installed and started locally, use the following URL in browser :
+
+  http://localhost:9200/
+
+
+
+It should show you an output like:
+
+
+{
+  "name" : "ip-172-31-18-24.ap-south-1.compute.internal",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "wY9BlfS-TKqTaCRpMi8kDQ",
+  "version" : {
+    "number" : "8.8.1",
+    "build_flavor" : "default",
+    "build_type" : "tar",
+    "build_hash" : "f8edfccba429b6477927a7c1ce1bc6729521305e",
+    "build_date" : "2023-06-05T21:32:25.188464208Z",
+    "build_snapshot" : false,
+    "lucene_version" : "9.6.0",
+    "minimum_wire_compatibility_version" : "7.17.0",
+    "minimum_index_compatibility_version" : "7.0.0"
+  },
+  "tagline" : "You Know, for Search"
+}
+
+
+
+
+
+
+## Adding data to index
+
+curl -XPOST -H "Content-Type: application/json" localhost:9200/samples/_bulk -d '
+{"index": {"_id": "975463711"}}
+{"Amount": "480", "Quantity": "2", "Id": "975463711", "Client_Store_sk": "1109"}
+{"index": {"_id": "975463943"}}
+{"Amount": "2105", "Quantity": "2", "Id": "975463943", "Client_Store_sk": "1109"}
+'
+
+
+[ec2-user@ip-172-31-18-24 elasticsearch-8.8.1]$ curl -XPOST -H "Content-Type: application/json" localhost:9200/samples/_bulk -d '
+{"index": {"_id": "975463711"}}
+{"Amount": "480", "Quantity": "2", "Id": "975463711", "Client_Store_sk": "1109"}
+{"index": {"_id": "975463943"}}
+{"Amount": "2105", "Quantity": "2", "Id": "975463943", "Client_Store_sk": "1109"}
+'
+{"took":87,"errors":false,"items":[{"index":{"_index":"samples","_id":"975463711","_version":1,"result":"created","_shards":{"total":2,"successful":1,"failed":0},"_seq_no":3,"_primary_term":4,"status":201}},{"index":{"_index":"samples","_id":"975463943","_version":1,"result":"created","_shards":{"total":2,"successful":1,"failed":0},"_seq_no":4,"_primary_term":4,"status":201}}]}
+
+
+
+## Deploying Presto
+
+Deploy presto using below Documentation
+
+https://prestodb.io/docs/current/installation/deployment.html
+
+Elasticsearch Connector Configuration#
+
+To configure the Elasticsearch connector, create a catalog properties file etc/catalog/elasticsearch.properties with the following contents, replacing the properties as appropriate:
+
+connector.name=elasticsearch
+elasticsearch.host=localhost
+elasticsearch.port=9200
+elasticsearch.default-schema-name=default
+
+
+
+## Presto-Command Line Interface
+
+The Presto CLI provides a terminal-based interactive shell for running queries. The CLI is a self-executing JAR file, which means it acts like a normal UNIX executable.
+
+Download presto-cli-0.281-executable.jar, rename it to presto, make it executable with chmod +x, then run it:
+
+./presto --server localhost:8080 --catalog elasticsearch --schema default
+Run the CLI with the --help option to see the available options.
+
+$ ./presto --server localhost:8080 --catalog elasticsearch --schema default
+
+presto> show tables in elasticsearch.default;
+    Table     
+--------------
+ samples      
+ single_index 
+(2 rows)
+
+Query 20230621_131210_00019_gm3cm, FINISHED, 1 node
+Splits: 19 total, 19 done (100.00%)
+[Latency: client-side: 249ms, server-side: 240ms] [2 rows, 53B] [8 rows/s, 220B/s]
+
+presto> select * from elasticsearch.default.samples;
+ amount | client_store_sk |    id     | quantity | school | school2 | students 
+--------+-----------------+-----------+----------+--------+---------+----------
+ NULL   | NULL            | NULL      | NULL     | NULL   | NULL    |    50000 
+ 480    | 1109            | 975463711 | 2        | NULL   | NULL    | NULL     
+ 2105   | 1109            | 975463943 | 2        | NULL   | NULL    | NULL     
+(3 rows)
+
+Query 20230622_071755_00006_58nhi, FINISHED, 1 node
+Splits: 17 total, 17 done (100.00%)
+[Latency: client-side: 465ms, server-side: 442ms] [3 rows, 165B] [6 rows/s, 373B/s]
