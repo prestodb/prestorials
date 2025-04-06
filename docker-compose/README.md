@@ -1,5 +1,5 @@
 # Presto in Docker Compose
-This is a sample setup to run a Presto cluster with 1 coordinator and 2 workers using either [Minio](/docker-compose/minio/readme), [Mysql](/docker-compose/mysql/readme), [MongoDB](/docker-compose/MongoDB/readme), or [local filesystem](/docker-compose-native/local-fs/readme) for storage.
+This is a sample setup to run a Presto cluster with 1 coordinator and 2 workers using either [Minio](/docker-compose/minio/readme.md), [Mysql](/docker-compose/mysql/readme.md), [MongoDB](/docker-compose/MongoDB/readme.md), or [local filesystem](/docker-compose-native/local-fs/readme.md) for storage.
 
 ## Requirements
 * Mac OS X or Linux, with minimum 10G memory and 50G free disk space

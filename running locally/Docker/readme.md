@@ -5,8 +5,8 @@
 This folder contains example files and steps for setting up Presto using Docker.
 <br>
 
-1. [Using Docker Desktop](#Running Presto using Docker Desktop)
-2. [Using Docker CLI](#Running Presto using Docker CLI)
+1. [Using Docker Desktop](#running-presto-using-docker-desktop)
+2. [Using Docker CLI](#running-presto-using-docker-cli)
 
 ## Requirements
 
