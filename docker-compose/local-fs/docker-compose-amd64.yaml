@@ -15,11 +15,12 @@ services:
     deploy:
       resources:
         limits:
-          memory: 2G
+          memory: 4G
     ports:
       - 8080:8080
     volumes:
       - ./data:/home/data
+      - ./iceberg_data:/home/iceberg_data
       - ./configs/coordinator/config.properties:/opt/presto-server/etc/config.properties
       - ./configs/coordinator/jvm.config:/opt/presto-server/etc/jvm.config
       - ./configs/coordinator/node.properties:/opt/presto-server/etc/node.properties
@@ -48,9 +49,10 @@ services:
     deploy:
       resources:
         limits:
-          memory: 4G
+          memory: 8G
     volumes:
       - ./data:/home/data
+      - ./iceberg_data:/home/iceberg_data
       - ./configs/workers/config.properties:/opt/presto-server/etc/config.properties
       - ./configs/workers/jvm.config:/opt/presto-server/etc/jvm.config
       - ./configs/workers/node_1.properties:/opt/presto-server/etc/node.properties
@@ -73,9 +75,10 @@ services:
     deploy:
       resources:
         limits:
-          memory: 4G
+          memory: 8G
     volumes:
       - ./data:/home/data
+      - ./iceberg_data:/home/iceberg_data
       - ./configs/workers/config.properties:/opt/presto-server/etc/config.properties
       - ./configs/workers/jvm.config:/opt/presto-server/etc/jvm.config
       - ./configs/workers/node_2.properties:/opt/presto-server/etc/node.properties

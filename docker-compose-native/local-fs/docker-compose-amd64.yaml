@@ -6,7 +6,7 @@ networks:
         - subnet:  172.19.0.0/24
           gateway: 172.19.0.1
 
-services:    
+services:
   coordinator:
     container_name: coordinator
     image: public.ecr.aws/oss-presto/presto:0.295-20250915150451-0494998-jdk17
@@ -20,6 +20,7 @@ services:
       - 8080:8080
     volumes:
       - ./data:/home/data
+      - ./iceberg_data:/home/iceberg_data
       - ./etc_coordinator:/opt/presto-server/etc
     healthcheck:
       test: ["CMD", "curl", "-f", "http://172.19.0.4:8080"]
@@ -44,6 +45,7 @@ services:
       - 8081:8081
     volumes:
       - ./data:/home/data
+      - ./iceberg_data:/home/iceberg_data
       - ./etc_sidecar:/opt/presto-server/etc
     networks:
       presto:
@@ -62,6 +64,7 @@ services:
       - 8082:8082
     volumes:
       - ./data:/home/data
+      - ./iceberg_data:/home/iceberg_data
       - ./etc_worker:/opt/presto-server/etc
     networks:
       presto:

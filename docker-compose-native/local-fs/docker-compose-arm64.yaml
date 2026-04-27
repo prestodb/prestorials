@@ -6,7 +6,7 @@ networks:
         - subnet:  172.19.0.0/24
           gateway: 172.19.0.1
 
-services:    
+services:
   coordinator:
     container_name: coordinator
     image: prestodb/presto:latest
@@ -19,13 +19,9 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ./data:/home
-      - ./configs/coordinator/log.properties:/opt/presto-server/etc/log.properties
-      - ./configs/coordinator/config.properties:/opt/presto-server/etc/config.properties
-      - ./configs/coordinator/jvm.config:/opt/presto-server/etc/jvm.config
-      - ./configs/coordinator/node.properties:/opt/presto-server/etc/node.properties
-      - ./configs/coordinator/catalog/hive.properties:/opt/presto-server/etc/catalog/hive.properties
-      - ./configs/coordinator/catalog/iceberg.properties:/opt/presto-server/etc/catalog/iceberg.properties
+      - ./data:/home/data
+      - ./iceberg_data:/home/iceberg_data
+      - ./etc_coordinator:/opt/presto-server/etc
     healthcheck:
       test: ["CMD", "curl", "-f", "http://172.19.0.4:8080"]
       interval: 5m
@@ -35,10 +31,9 @@ services:
     networks:
       presto:
         ipv4_address: 172.19.0.4
-
-  worker_1:
-    container_name: worker_1
-    image: public.ecr.aws/oss-presto/presto-native:0.289-ubuntu-arm64
+  sidecar:
+    container_name: sidecar
+    image: public.ecr.aws/oss-presto/presto-native:0.297-centos-arm64
     platform: linux/arm64
     restart: always
     deploy:
@@ -48,19 +43,16 @@ services:
     ports:
       - 8081:8081
     volumes:
-      - ./data:/home
-      - ./configs/coordinator/log.properties:/opt/presto-server/etc/log.properties
-      - ./configs/workers/config_1.properties:/opt/presto-server/etc/config.properties
-      - ./configs/workers/node_1.properties:/opt/presto-server/etc/node.properties
-      - ./configs/workers/catalog/hive.properties:/opt/presto-server/etc/catalog/hive.properties
-      - ./configs/workers/catalog/iceberg.properties:/opt/presto-server/etc/catalog/iceberg.properties
+      - ./data:/home/data
+      - ./iceberg_data:/home/iceberg_data
+      - ./etc_sidecar:/opt/presto-server/etc
     networks:
       presto:
         ipv4_address: 172.19.0.11
 
-  worker_2:
-    container_name: worker_2
-    image: public.ecr.aws/oss-presto/presto-native:0.289-ubuntu-arm64
+  worker:
+    container_name: worker
+    image: public.ecr.aws/oss-presto/presto-native:0.297-centos-arm64
     platform: linux/arm64
     restart: always
     deploy:
@@ -70,12 +62,9 @@ services:
     ports:
       - 8082:8082
     volumes:
-      - ./data:/home
-      - ./configs/coordinator/log.properties:/opt/presto-server/etc/log.properties
-      - ./configs/workers/config_2.properties:/opt/presto-server/etc/config.properties
-      - ./configs/workers/node_2.properties:/opt/presto-server/etc/node.properties
-      - ./configs/workers/catalog/hive.properties:/opt/presto-server/etc/catalog/hive.properties
-      - ./configs/workers/catalog/iceberg.properties:/opt/presto-server/etc/catalog/iceberg.properties
+      - ./data:/home/data
+      - ./iceberg_data:/home/iceberg_data
+      - ./etc_worker:/opt/presto-server/etc
     networks:
       presto:
         ipv4_address: 172.19.0.12
