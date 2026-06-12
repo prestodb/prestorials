@@ -40,3 +40,4 @@ Legend [ ☑️ = completed | ✏️ = drafting ]
 2. ✏️ [How to run Presto on AWS](https://github.com/prestodb/prestorials/tree/main/running%20on%20cloud%20services/AWS)
 3. ✏️ [How to run Presto locally using Docker](https://github.com/prestodb/prestorials/tree/main/running%20locally/Docker)
 4. How to connect Presto to MongoDB
+5. ✏️ [How to run GPU-accelerated Presto C++ with Docker](https://github.com/prestodb/prestorials/tree/main/docker-compose-native/gpu)
