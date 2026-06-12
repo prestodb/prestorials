@@ -1,0 +1,55 @@
+networks:
+  presto:
+    driver: bridge
+    ipam:
+      config:
+        - subnet:  172.35.0.0/24
+          gateway: 172.35.0.1
+
+services:
+  coordinator:
+    container_name: coordinator-gpu
+    image: prestodb/presto:coordinator-gpu-nightly
+    platform: linux/amd64
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+    ports:
+      - 8080:8080
+    volumes:
+      - ./data:/home/data
+      - ./etc_coordinator:/opt/presto-server/etc
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://172.35.0.4:8080"]
+      interval: 5m
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks:
+      presto:
+        ipv4_address: 172.35.0.4
+
+  worker:
+    container_name: worker-gpu
+    image: prestodb/presto-native:gpu-nightly
+    platform: linux/amd64
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["0"]
+              capabilities: [gpu]
+    ports:
+      - 8082:8082
+    volumes:
+      - ./data:/home/data
+      - ./etc_worker:/opt/presto-server/etc
+    networks:
+      presto:
+        ipv4_address: 172.35.0.11

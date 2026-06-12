@@ -1,4 +1,5 @@
 ./docker-compose-native/minio/data/*
 ./docker-compose-native/prestissimo/data
+./docker-compose-native/gpu/data
 .DS_Store
 .idea
