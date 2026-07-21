@@ -3,7 +3,7 @@
 
 This prestorial is a set of Jupyter notebooks that build up a working system step by step:
 
-1. start a **CPU** Presto native C++ (Java coordinator + [native C++](https://github.com/facebookincubator/velox) worker),
+1. start a **CPU** Presto native C++ cluster (Java coordinator + [native C++](https://github.com/facebookincubator/velox) worker),
 2. load a real dataset — IBM's synthetic [Anti-Money-Laundering dataset](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml) (~180M transactions),
 3. start a **GPU** Presto C++ cluster ([native](https://github.com/facebookincubator/velox) + [cuDF](https://docs.rapids.ai/api/cudf/stable/)) **beside** the CPU cluster, sharing the same metastore and warehouse read-only — then run the same query on both engines and compare.
 
@@ -36,8 +36,11 @@ The GPU images are experimental, expected to change often, and provided for deve
 
 In addition to the [general requirements](/readme.md) of this repository:
 
-- An NVIDIA GPU with up-to-date drivers, and the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) so Docker can expose the GPU to the worker container (only needed for notebook 3)
-- Python ≥ 3.11 for the notebooks
+- **An NVIDIA GPU** with up-to-date drivers, and the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) so Docker can expose the GPU to the worker container (only needed for notebook 3)
+- **Python ≥ 3.11** for the notebooks
+- **128 GB host RAM** or **change configs** - To run the configs as is requires 128 GB host RAM. The native worker is configured with `system-memory-gb=72` (`etc_CPU_worker/config.properties`). On smaller VMs, lower `system-memory-gb` / `query-memory-gb` and the compose `memory` limits proportionally.
+    - Notebooks were validated on a 32 vCPU / 128 GB AWS g5.8xlarge
+
 
 Confirm the GPU is visible to Docker with:
 
