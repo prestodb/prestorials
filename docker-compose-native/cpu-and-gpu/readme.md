@@ -1,18 +1,17 @@
-# Add GPU-accelerated Presto to an existing Presto cluster — Jupyter notebooks
+# Add GPU-acceleration to existing Presto cluster — Jupyter notebooks
 
-![Presto · Velox · NVIDIA cuDF](presto_velox_cudf_transparent.png)
 
 This prestorial is a set of Jupyter notebooks that build up a working system step by step:
 
-1. start a **CPU** Presto C++ cluster (Java coordinator + [Velox](https://github.com/facebookincubator/velox) C++ worker),
+1. start a **CPU** Presto native C++ (Java coordinator + [native C++](https://github.com/facebookincubator/velox) worker),
 2. load a real dataset — IBM's synthetic [Anti-Money-Laundering dataset](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml) (~180M transactions),
-3. start a **GPU** Presto C++ cluster ([Velox](https://github.com/facebookincubator/velox) + [cuDF](https://docs.rapids.ai/api/cudf/stable/)) **beside** the CPU cluster, sharing the same metastore and warehouse read-only — then run the same query on both engines and compare.
+3. start a **GPU** Presto C++ cluster ([native](https://github.com/facebookincubator/velox) + [cuDF](https://docs.rapids.ai/api/cudf/stable/)) **beside** the CPU cluster, sharing the same metastore and warehouse read-only — then run the same query on both engines and compare.
 
 | | Notebook | Description | Engine |
 |---|---|---|---|
-| **1** | [`01_presto_cpu.ipynb`](01_presto_cpu.ipynb) | Start Presto cluster, smoke-test w/ external Parquet table | CPU |
-| **2** | [`02_aml_demo.ipynb`](02_aml_demo.ipynb) | Convert the IBM AML dataset (~180M rows) to Parquet, create the table, run queries | CPU |
-| **3** | [`03_add_gpu.ipynb`](03_add_gpu.ipynb) | Add GPU engine (Velox + cuDF) beside the CPU engine, run the same query on both | GPU |
+| **1** | [`01_presto_cpu.ipynb`](01_presto_cpu.ipynb) | Start a **CPU** Presto cluster and smoke-test w/ external Parquet table | CPU |
+| **2** | [`02_aml_demo.ipynb`](02_aml_demo.ipynb) | Convert the IBM AML dataset (~180M rows) to Parquet, create the table, and run queries | CPU |
+| **3** | [`03_add_gpu.ipynb`](03_add_gpu.ipynb) | Add a **GPU** engine (native + cuDF) beside the CPU engine and run the same queries on both CPU and GPU engines | GPU |
 
 ![architecture](arch_diagram.png)
 
@@ -64,4 +63,4 @@ Notebook 2 uses IBM's synthetic [Anti-Money-Laundering dataset](https://www.kagg
 
 ## Credits
 
-Adapted from [will-hill/Presto-Velox-cuDF-Notebooks](https://github.com/will-hill/Presto-Velox-cuDF-Notebooks). A video walk-through is planned in collaboration with IBM.
+Adapted from [will-hill/Presto-native-cuDF-Notebooks](https://github.com/will-hill/Presto-native-cuDF-Notebooks). A video walk-through is planned in collaboration with IBM.
