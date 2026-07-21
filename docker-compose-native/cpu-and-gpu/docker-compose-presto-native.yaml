@@ -1,0 +1,75 @@
+name: prestodb-cpu
+
+networks:
+  presto:
+    driver: bridge
+
+services:
+  coordinator:
+    container_name: coordinator-cpu
+    image: prestodb/presto:latest
+    platform: linux/amd64
+    restart: always
+    # Run as the host user (uid:gid) instead of root. Must match the owner of ./metastore
+    # and ./warehouse on the host so the file metastore can write metadata there.
+    user: "1000:1000"
+    # Non-root host user (uid:gid)
+    # The uid just needs an /etc/passwd entry for the Hive client's JAAS Unix login (see below)
+    deploy:
+      resources:
+        limits:
+          cpus: "4"
+          # 16G container (-Xmx12G in etc_*_coordinator/jvm.config) fits with headroom          
+          memory: 16G
+    ports:
+      - 8080:8080
+    volumes:
+      - ./metastore:/home/metastore
+      - ./warehouse:/home/warehouse
+      - ./etc_CPU_coordinator:/opt/presto-server/etc
+      # Give uid 1000 a name in the container. The Java coordinator's Hadoop/Hive client does a
+      # JAAS Unix login, which throws "invalid null input: name" if the uid has no /etc/passwd
+      # entry. The host's passwd already maps 1000 -> a real user, so mount it read-only.
+      - /etc/passwd:/etc/passwd:ro
+      # The image declares VOLUME /var/lib/presto/data (root-owned). We don't use it — node.data-dir
+      # is /tmp/presto/data — but mount a throwaway tmpfs here so Docker doesn't create a root-owned
+      # anonymous volume for it on every `up`.
+    tmpfs:
+      - /var/lib/presto/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 5m
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks:
+      - presto
+
+  worker:
+    container_name: worker-cpu
+    image: prestodb/presto-native:latest
+    platform: linux/amd64
+    restart: always    
+    user: "1000:1000"
+    depends_on:
+      - coordinator
+    deploy:
+      resources:
+        limits:          
+          cpus: "12"
+          memory: 80G
+    ports:
+      - 8082:8082
+    volumes:
+      - ./warehouse:/home/warehouse
+      - ./etc_CPU_worker:/opt/presto-server/etc
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:8082/v1/info"]
+        interval: 5m
+        timeout: 10s
+        retries: 5
+        start_period: 60s
+    tmpfs:
+      - /var/lib/presto/data
+    networks:
+      - presto

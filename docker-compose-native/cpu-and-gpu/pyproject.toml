@@ -1,0 +1,12 @@
+[project]
+name = "presto-velox-cudf-notebooks"
+version = "0.1.0"
+description = "Run CPU and GPU (Velox + cuDF) Presto C++ clusters side by side with Docker, from Jupyter notebooks"
+readme = "readme.md"
+requires-python = ">=3.11"
+dependencies = [
+    "jupyterlab>=4.6.1",
+    "jupyterlab-nvdashboard>=0.15.0",
+    "polars>=1.42.1",
+    "presto-python-client>=0.8.4",
+]
