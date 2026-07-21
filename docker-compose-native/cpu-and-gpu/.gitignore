@@ -1,0 +1,9 @@
+# runtime artifacts created by the notebooks
+metastore/
+warehouse/
+data/
+etc_GPU_coordinator/
+etc_GPU_worker/
+.ipynb_checkpoints/
+.venv/
+uv.lock
